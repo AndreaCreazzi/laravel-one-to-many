@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Project;
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -24,7 +25,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create');
+        $project = new Project();
+        $types = Type::select('id', 'label')->get();
+        return view('admin.projects.create', compact('project', 'types'));
     }
 
     /**
@@ -42,7 +45,8 @@ class ProjectController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'link' => 'required|url:http,https',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id'
         ]);
         $project->fill($data);
         $project->save();
@@ -63,7 +67,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::select('id', 'label')->get();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -77,7 +82,8 @@ class ProjectController extends Controller
             'title' => ['required', 'string'],
             'description' => 'required|string',
             'link' => 'required|url:http,https',
-            'image' => 'nullable|image'
+            'image' => 'nullable|image',
+            'type_id' => 'nullable|exists:types,id'
         ]);
 
         $data = $request->all();

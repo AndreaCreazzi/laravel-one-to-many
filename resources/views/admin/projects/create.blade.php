@@ -52,7 +52,24 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="type">Tipo</label>
+                                    <select
+                                        class="form-select @error('type_id') is-invalid @elseif(old('type_id')) is-valid @enderror"
+                                        name="type_id" id="type">
+                                        <option value="">Nessuno</option>
+                                        @foreach ($types as $type)
+                                            <option @if (old('type_id') == $type->id)  @endif value="{{ $type->id }}">
+                                                {{ $type->label }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('type_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
                                 <div class="mb-3">
                                     <label for="image">Immagine</label>
                                     <input type="file"

@@ -13,7 +13,8 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">title</th>
+                        <th scope="col">titolo</th>
+                        <th scope="col">tipo</th>
                         <th scope="col">link</th>
                         <th scope="col"></th>
                     </tr>
@@ -23,6 +24,7 @@
                         <tr>
                             <th scope="row">{{ $project->id }}</th>
                             <td>{{ $project->title }}</td>
+                            <td>{{ $project->type?->label }}</td>
                             <td><a class="text-decoration-none text-white"
                                     href="{{ $project->link }}">{{ $project->link }}</a></td>
                             <td>
