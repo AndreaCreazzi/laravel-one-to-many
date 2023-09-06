@@ -24,7 +24,14 @@
                         <tr>
                             <th scope="row">{{ $project->id }}</th>
                             <td>{{ $project->title }}</td>
-                            <td>{{ $project->type?->label }}</td>
+                            <td>
+                                @if ($project->type)
+                                    <span class="badge"
+                                        style="background-color: {{ $project->type->color }}">{{ $project->type?->label }}</span>
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td><a class="text-decoration-none text-white"
                                     href="{{ $project->link }}">{{ $project->link }}</a></td>
                             <td>
