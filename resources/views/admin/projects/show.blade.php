@@ -15,8 +15,8 @@
                         <div class="row">
                             @if ($projects->image)
                                 <div class="col-6 text-center">
-                                    <img class="img-fluid" style="height: 100px"
-                                        src="{{ asset('storage/' . $projects->image) }}" alt="">
+                                    <img class="img-fluid" style="height: 100px" src="{{ $projects->getImagePath() }}"
+                                        alt="">
                                 </div>
                             @endif
                             <div class="col-6">
